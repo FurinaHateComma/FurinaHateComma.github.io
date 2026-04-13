@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>P9329题解 | FHC 's Blog</title><meta name="author" content="FHC"><meta name="copyright" content="FHC"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="喵喵题，挺有启发意义的？ 注意到这个东西显然是维护链信息，但是这个东西似乎不是很好树链剖分维护： 如果一定要用树链剖分维护的话似乎只能变成一个二元的约束： dfn 区间和值域限制。 这个直接做的复杂度 log⁡3\log^3log3 的，非常显然：虽然这个东西似乎可以分散层叠？但是不会优于 log⁡2\log^2log2 而且难写。 启发我们用一种可以直接得到树结构的维护方式： 主席树的树上差分。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="P9329题解">
+<meta property="og:url" content="https://furinahatecomma.github.io/2026/04/13/P9329%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:site_name" content="FHC &#39;s Blog">
+<meta property="og:description" content="喵喵题，挺有启发意义的？ 注意到这个东西显然是维护链信息，但是这个东西似乎不是很好树链剖分维护： 如果一定要用树链剖分维护的话似乎只能变成一个二元的约束： dfn 区间和值域限制。 这个直接做的复杂度 log⁡3\log^3log3 的，非常显然：虽然这个东西似乎可以分散层叠？但是不会优于 log⁡2\log^2log2 而且难写。 启发我们用一种可以直接得到树结构的维护方式： 主席树的树上差分。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://furinahatecomma.github.io/img/mizuki.jpg">
+<meta property="article:published_time" content="2026-04-13T07:58:33.000Z">
+<meta property="article:modified_time" content="2026-04-13T08:08:50.439Z">
+<meta property="article:author" content="FHC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://furinahatecomma.github.io/img/mizuki.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "P9329题解",
+  "url": "https://furinahatecomma.github.io/2026/04/13/P9329%E9%A2%98%E8%A7%A3/",
+  "image": "https://furinahatecomma.github.io/img/mizuki.jpg",
+  "datePublished": "2026-04-13T07:58:33.000Z",
+  "dateModified": "2026-04-13T08:08:50.439Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "FHC",
+      "url": "https://furinahatecomma.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://furinahatecomma.github.io/2026/04/13/P9329%E9%A2%98%E8%A7%A3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'P9329题解',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><script>document.documentElement.style.setProperty('--diy-bg', 'url(/img/bg/' + (Math.floor(Math.random()*10)+1) + '.webp)');</script><style>#page-header,#page-header.post-bg{transform:none!important;animation:none!important}#web_bg,#page-header,#page-header.post-bg{background-image:var(--diy-bg)!important;background-attachment:fixed!important;background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important}#web_bg{opacity:0.85!important}#page-header:before,#page-header.post-bg:before{background:rgba(0,0,0,0.4)!important}</style><meta name="generator" content="Hexo 8.1.1"></head><body><div class="bg-animation" id="web_bg" style="background: none;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/mizuki.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">FHC 's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">P9329题解</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">P9329题解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-04-13T07:58:33.000Z" title="发表于 2026-04-13 15:58:33">2026-04-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-04-13T08:08:50.439Z" title="更新于 2026-04-13 16:08:50">2026-04-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>喵喵题，挺有启发意义的？</p>
+<p>注意到这个东西显然是维护链信息，但是这个东西似乎不是很好树链剖分维护：</p>
+<p>如果一定要用树链剖分维护的话似乎只能变成一个二元的约束： <code>dfn</code> 区间和值域限制。</p>
+<p>这个直接做的复杂度 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mo><mi>log</mi><mo>⁡</mo></mo><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">\log^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0928879999999999em;vertical-align:-0.19444em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8984479999999999em;"><span style="top:-3.1473400000000002em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span> 的，非常显然：虽然这个东西似乎可以分散层叠？但是不会优于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mo><mi>log</mi><mo>⁡</mo></mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\log^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0928879999999999em;vertical-align:-0.19444em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8984479999999999em;"><span style="top:-3.1473400000000002em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> 而且难写。</p>
+<p>启发我们用一种可以直接得到树结构的维护方式： 主席树的树上差分。</p>
+<p>差分以后这个题就可以简单的主席树上二分做到单 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span>。</p>
+<p>code：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">using ll = long long;</span><br><span class="line"></span><br><span class="line">#define rep(i, a, b) for (int i = (a) ; i &lt;= (b) ; i ++)</span><br><span class="line">#define per(i, a, b) for (int i = (a) ; i &gt;= (b) ; i --)</span><br><span class="line"></span><br><span class="line">const int N = 1e5 + 10;</span><br><span class="line">const int mod = 1e9 + 7;</span><br><span class="line"></span><br><span class="line">int n, m, q;</span><br><span class="line"></span><br><span class="line">vector &lt; int &gt; e[N];</span><br><span class="line"></span><br><span class="line">struct Node &#123; int ls, rs, cnt; ll val; &#125;;</span><br><span class="line"></span><br><span class="line">Node t[N * 40];</span><br><span class="line"></span><br><span class="line">int cnt;</span><br><span class="line"></span><br><span class="line">#define ls(p) t[p].ls</span><br><span class="line">#define rs(p) t[p].rs</span><br><span class="line"></span><br><span class="line">void pu (int p) &#123; </span><br><span class="line">    t[p].val = t[ls(p)].val + t[rs(p)].val; </span><br><span class="line">    t[p].cnt = t[ls(p)].cnt + t[rs(p)].cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void upd (int p, int l, int r, int x, ll v, int &amp;tp) &#123;</span><br><span class="line">    tp = ++ cnt;</span><br><span class="line"></span><br><span class="line">    if (l == r) &#123; t[tp].val = v + t[p].val; t[tp].cnt = t[p].cnt + 1; return; &#125;</span><br><span class="line"></span><br><span class="line">    int mid = (l + r) &gt;&gt; 1;</span><br><span class="line"></span><br><span class="line">    if (x &lt;= mid) upd (ls(p), l, mid, x, v, ls(tp)), rs(tp) = t[p].rs;</span><br><span class="line">    if (x &gt; mid) upd (rs(p), mid + 1, r, x, v, rs(tp)), ls(tp) = t[p].ls;</span><br><span class="line"></span><br><span class="line">    pu (tp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int qks (int p1, int p2, int L, int fL, int l, int r, ll x) &#123;</span><br><span class="line">    ll Lv = t[ls(p1)].val + t[ls(p2)].val - t[ls(L)].val - t[ls(fL)].val;</span><br><span class="line">    int Rc = t[rs(p1)].cnt + t[rs(p2)].cnt - t[rs(L)].cnt - t[rs(fL)].cnt;</span><br><span class="line"></span><br><span class="line">    if (! (p1 + p2 + L + fL)) return 0;</span><br><span class="line"></span><br><span class="line">    if (l == r) &#123;</span><br><span class="line">        int C = t[p1].cnt + t[p2].cnt - t[L].cnt - t[fL].cnt;</span><br><span class="line">        int c = min ((ll) C, x / l);</span><br><span class="line"></span><br><span class="line">        return C - c;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int mid = (l + r) &gt;&gt; 1;</span><br><span class="line">    if (Lv &lt;= x) </span><br><span class="line">        return qks (rs(p1), rs(p2), rs(L), rs(fL), mid + 1, r, x - Lv);</span><br><span class="line">    return qks (ls(p1), ls(p2), ls(L), ls(fL), l, mid, x) + Rc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vector &lt; int &gt; pnt[N];</span><br><span class="line"></span><br><span class="line">int fr[N], to[N], dw[N];</span><br><span class="line"></span><br><span class="line">int rt[N], fa[N][20], dep[N];</span><br><span class="line"></span><br><span class="line">void ddfs (int p, int f) &#123;</span><br><span class="line">    dep[p] = dep[f] + 1;</span><br><span class="line"></span><br><span class="line">    for (auto t : e[p]) &#123;</span><br><span class="line">        if (t == f) continue;</span><br><span class="line"></span><br><span class="line">        // cerr &lt;&lt; p &lt;&lt; &quot; -&gt; &quot; &lt;&lt; t &lt;&lt; &#x27;\n&#x27;;</span><br><span class="line"></span><br><span class="line">        ddfs (t, p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void dfs (int p, int f) &#123;</span><br><span class="line">    // cerr &lt;&lt; p &lt;&lt; &#x27; &#x27; &lt;&lt; f &lt;&lt; &#x27;\n&#x27;;</span><br><span class="line"></span><br><span class="line">    rt[p] = rt[f]; fa[p][0] = f;</span><br><span class="line">    </span><br><span class="line">    for (int i = 1 ; i &lt;= 18 ; i ++) </span><br><span class="line">        fa[p][i] = fa[fa[p][i - 1]][i - 1];</span><br><span class="line">    </span><br><span class="line">    for (auto c : pnt[p]) upd (rt[p], 1, 1e9, c, c, rt[p]);</span><br><span class="line">    </span><br><span class="line">    for (auto t : e[p]) &#123;</span><br><span class="line">        if (t == f) continue;</span><br><span class="line"></span><br><span class="line">        // cerr &lt;&lt; p &lt;&lt; &quot; -&gt; &quot; &lt;&lt; t &lt;&lt; &#x27;\n&#x27;;</span><br><span class="line"></span><br><span class="line">        dfs (t, p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int lca (int x, int y) &#123;</span><br><span class="line">    if (dep[x] &lt; dep[y]) swap (x, y);</span><br><span class="line"></span><br><span class="line">    int d = dep[x] - dep[y];</span><br><span class="line"></span><br><span class="line">    for (int k = 18 ; k &gt;= 0 ; k --)</span><br><span class="line">        if ((d &gt;&gt; k) &amp; 1) x = fa[x][k];</span><br><span class="line"></span><br><span class="line">    if (x == y) return x;</span><br><span class="line"></span><br><span class="line">    for (int k = 18 ; k &gt;= 0 ; k --)</span><br><span class="line">        if (fa[x][k] != fa[y][k]) x = fa[x][k], y = fa[y][k];</span><br><span class="line">    </span><br><span class="line">    return fa[x][0];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void solve() &#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m &gt;&gt; q;</span><br><span class="line"></span><br><span class="line">    rep (i, 1, n - 1) &#123;</span><br><span class="line"></span><br><span class="line">        cin &gt;&gt; fr[i] &gt;&gt; to[i];</span><br><span class="line"></span><br><span class="line">        e[fr[i]].push_back (to[i]);</span><br><span class="line">        e[to[i]].push_back (fr[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ddfs (1, 0);</span><br><span class="line"></span><br><span class="line">    rep (i, 1, n - 1) &#123;</span><br><span class="line">        if (dep[fr[i]] &gt; dep[to[i]]) dw[i] = fr[i];</span><br><span class="line">        else dw[i] = to[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    rep (i, 1, m) &#123;</span><br><span class="line">        int p, c;</span><br><span class="line"></span><br><span class="line">        cin &gt;&gt; p &gt;&gt; c;</span><br><span class="line"></span><br><span class="line">        pnt[dw[p]].push_back (c);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dfs (1, 0);</span><br><span class="line"></span><br><span class="line">    rep (i, 1, q) &#123;</span><br><span class="line">        int s, t, x; ll y;</span><br><span class="line"></span><br><span class="line">        cin &gt;&gt; s &gt;&gt; t &gt;&gt; x &gt;&gt; y;</span><br><span class="line"></span><br><span class="line">        int L = lca (s, t);</span><br><span class="line"></span><br><span class="line">        int c = qks (rt[s], rt[t], rt[L], rt[L], 1, 1e9, y);</span><br><span class="line"></span><br><span class="line">        if (x &gt;= c) cout &lt;&lt; x - c &lt;&lt; &#x27;\n&#x27;;</span><br><span class="line">        else cout &lt;&lt; -1 &lt;&lt; &#x27;\n&#x27;; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">signed main() &#123;</span><br><span class="line">    ios::sync_with_stdio(0);</span><br><span class="line">    cin.tie(0);</span><br><span class="line">    cout.tie(0);</span><br><span class="line"></span><br><span class="line">    int t = 1;</span><br><span class="line">    // cin &gt;&gt; t;</span><br><span class="line">    while (t--) solve();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://furinahatecomma.github.io">FHC</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://furinahatecomma.github.io/2026/04/13/P9329%E9%A2%98%E8%A7%A3/">https://furinahatecomma.github.io/2026/04/13/P9329%E9%A2%98%E8%A7%A3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://furinahatecomma.github.io" target="_blank">FHC 's Blog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/mizuki.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/04/13/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Hello World</div></div><div class="info-2"><div class="info-item-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. LaTeXLaTeXLaTeX  Quick Start  Create a new post 1$ hexo new &quot;My New Post&quot; More info: Writing  Run server 1$ hexo server More info: Server  Generate static files 1$ hexo generate More info: Generating  Deploy to remote sites 1$ hexo deploy More info: Deployment </div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/mizuki.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">FHC</div><div class="author-info-description">譲れないアイデンティティ</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/FurinaHateComma"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/04/13/P9329%E9%A2%98%E8%A7%A3/" title="P9329题解">P9329题解</a><time datetime="2026-04-13T07:58:33.000Z" title="发表于 2026-04-13 15:58:33">2026-04-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/04/13/hello-world/" title="Hello World">Hello World</a><time datetime="2026-04-13T05:34:59.594Z" title="发表于 2026-04-13 13:34:59">2026-04-13</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By FHC</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
