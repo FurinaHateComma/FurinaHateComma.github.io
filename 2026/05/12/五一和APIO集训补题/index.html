@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>五一和APIO集训补题 | FHC 's Blog</title><meta name="author" content="FHC"><meta name="copyright" content="FHC"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="article">
+<meta property="og:title" content="五一和APIO集训补题">
+<meta property="og:url" content="https://furinahatecomma.github.io/2026/05/12/%E4%BA%94%E4%B8%80%E5%92%8CAPIO%E9%9B%86%E8%AE%AD%E8%A1%A5%E9%A2%98/index.html">
+<meta property="og:site_name" content="FHC &#39;s Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://furinahatecomma.github.io/img/mizuki.jpg">
+<meta property="article:published_time" content="2026-05-12T03:12:26.000Z">
+<meta property="article:modified_time" content="2026-05-12T03:12:26.598Z">
+<meta property="article:author" content="FHC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://furinahatecomma.github.io/img/mizuki.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "五一和APIO集训补题",
+  "url": "https://furinahatecomma.github.io/2026/05/12/%E4%BA%94%E4%B8%80%E5%92%8CAPIO%E9%9B%86%E8%AE%AD%E8%A1%A5%E9%A2%98/",
+  "image": "https://furinahatecomma.github.io/img/mizuki.jpg",
+  "datePublished": "2026-05-12T03:12:26.000Z",
+  "dateModified": "2026-05-12T03:12:26.598Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "FHC",
+      "url": "https://furinahatecomma.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://furinahatecomma.github.io/2026/05/12/%E4%BA%94%E4%B8%80%E5%92%8CAPIO%E9%9B%86%E8%AE%AD%E8%A1%A5%E9%A2%98/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '五一和APIO集训补题',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><script>document.documentElement.style.setProperty('--diy-bg', 'url(/img/bg/' + (Math.floor(Math.random()*10)+1) + '.webp)');</script><style>#page-header,#page-header.post-bg{transform:none!important;animation:none!important}#web_bg,#page-header,#page-header.post-bg{background-image:var(--diy-bg)!important;background-attachment:fixed!important;background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important}#web_bg{opacity:0.85!important}#page-header:before,#page-header.post-bg:before{background:rgba(0,0,0,0.4)!important}</style><meta name="generator" content="Hexo 8.1.1"></head><body><div class="bg-animation" id="web_bg" style="background: none;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/mizuki.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">FHC 's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">五一和APIO集训补题</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">五一和APIO集训补题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-05-12T03:12:26.000Z" title="发表于 2026-05-12 11:12:26">2026-05-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-05-12T03:12:26.598Z" title="更新于 2026-05-12 11:12:26">2026-05-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://furinahatecomma.github.io">FHC</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://furinahatecomma.github.io/2026/05/12/%E4%BA%94%E4%B8%80%E5%92%8CAPIO%E9%9B%86%E8%AE%AD%E8%A1%A5%E9%A2%98/">https://furinahatecomma.github.io/2026/05/12/%E4%BA%94%E4%B8%80%E5%92%8CAPIO%E9%9B%86%E8%AE%AD%E8%A1%A5%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://furinahatecomma.github.io" target="_blank">FHC 's Blog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/mizuki.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/05/12/%E6%A8%A1%E6%8B%9F%E8%B5%9B%E8%A1%A5%E9%A2%981/" title="模拟赛补题1"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">模拟赛补题1</div></div><div class="info-2"><div class="info-item-1">作为开场的第一场似乎比赛本身手感不错？但是状态不好所以有点摆xd  A 这个东西居然可以 O(1)O(1)O(1)，比较惊讶。 赛时犯了一堆大唐（ 注意到这个操作本质上是加上一个长度 a+ba + ba+b 的数在最后面然后右移 a+ba + ba+b。 其中这个数字有 aaa 个 1 和 bbb 个 0，那我们直接贪心选择这个数字的最大和最小值就好了。  B 这个题挺 ad-hoc 的吧，第一眼看成只有一个空位了。 如果是两个空位加上这个数据范围就应该猜测是一个 n2n ^ 2n2 或者 n3n ^ 3n3 的东西。 考虑这个大环允许我们做一个循环移位。 那么如果我们有一条不在大环上的边我们就可以交换两个相邻的位置了。  限制很松，冒泡即可。  C 场上差一点会完了，很牛的串串 ds 题。 一个很显著的结论就是直接匹配 LCP 和 LCS，剩下部分只能替换。 前者我们建立一棵前缀 Trie，后者我们将所有后缀哈希后放入桶中。 对于每一个桶，我们考虑先按照原串长度小到大排序。 然后这个东西相当于是固定了我们后缀的长度，前缀我们在字典树上找到对应长度的点并统计。 这个可以简单通过字...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/mizuki.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">FHC</div><div class="author-info-description">譲れないアイデンティティ</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/FurinaHateComma"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/12/%E4%BA%94%E4%B8%80%E5%92%8CAPIO%E9%9B%86%E8%AE%AD%E8%A1%A5%E9%A2%98/" title="五一和APIO集训补题">五一和APIO集训补题</a><time datetime="2026-05-12T03:12:26.000Z" title="发表于 2026-05-12 11:12:26">2026-05-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/12/%E6%A8%A1%E6%8B%9F%E8%B5%9B%E8%A1%A5%E9%A2%981/" title="模拟赛补题1">模拟赛补题1</a><time datetime="2026-05-12T03:08:04.000Z" title="发表于 2026-05-12 11:08:04">2026-05-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/12/%E7%82%B9%E5%88%86%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="点分树学习笔记">点分树学习笔记</a><time datetime="2026-05-12T03:04:18.000Z" title="发表于 2026-05-12 11:04:18">2026-05-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/12/%E9%95%BF%E9%93%BE%E5%89%96%E5%88%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="长链剖分学习笔记">长链剖分学习笔记</a><time datetime="2026-05-12T03:02:11.000Z" title="发表于 2026-05-12 11:02:11">2026-05-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/05/12/%E4%B8%80%E7%B1%BB%E5%AD%90%E5%BA%8F%E5%88%97%E5%8E%8B%E7%BC%A9%E8%BD%AC%E7%A7%BB%E7%9A%84dp%E9%97%AE%E9%A2%98/" title="一类子序列压缩转移的dp问题">一类子序列压缩转移的dp问题</a><time datetime="2026-05-12T02:59:45.000Z" title="发表于 2026-05-12 10:59:45">2026-05-12</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By FHC</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.16.28/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
