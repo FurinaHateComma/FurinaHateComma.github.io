@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>字符串集合 | FHC 's Blog</title><meta name="author" content="FHC"><meta name="copyright" content="FHC"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="感觉串串是真的难吧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串集合">
+<meta property="og:url" content="https://furinahatecomma.github.io/2026/07/25/%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%9B%86%E5%90%88/index.html">
+<meta property="og:site_name" content="FHC &#39;s Blog">
+<meta property="og:description" content="感觉串串是真的难吧。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://furinahatecomma.github.io/img/mizuki.jpg">
+<meta property="article:published_time" content="2026-07-25T07:44:58.000Z">
+<meta property="article:modified_time" content="2026-07-25T07:49:11.638Z">
+<meta property="article:author" content="FHC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://furinahatecomma.github.io/img/mizuki.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "字符串集合",
+  "url": "https://furinahatecomma.github.io/2026/07/25/%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%9B%86%E5%90%88/",
+  "image": "https://furinahatecomma.github.io/img/mizuki.jpg",
+  "datePublished": "2026-07-25T07:44:58.000Z",
+  "dateModified": "2026-07-25T07:49:11.638Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "FHC",
+      "url": "https://furinahatecomma.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://furinahatecomma.github.io/2026/07/25/%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%9B%86%E5%90%88/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '字符串集合',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><script>document.documentElement.style.setProperty('--diy-bg', 'url(/img/bg/' + (Math.floor(Math.random()*10)+1) + '.webp)');</script><style>#page-header,#page-header.post-bg{transform:none!important;animation:none!important}#web_bg,#page-header,#page-header.post-bg{background-image:var(--diy-bg)!important;background-attachment:fixed!important;background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important}#web_bg{opacity:0.85!important}#page-header:before,#page-header.post-bg:before{background:rgba(0,0,0,0.4)!important}</style><meta name="generator" content="Hexo 8.1.2"></head><body><div class="bg-animation" id="web_bg" style="background: none;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/mizuki.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">FHC 's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">字符串集合</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">字符串集合</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-07-25T07:44:58.000Z" title="发表于 2026-07-25 15:44:58">2026-07-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-07-25T07:49:11.638Z" title="更新于 2026-07-25 15:49:11">2026-07-25</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>感觉串串是真的难吧。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://furinahatecomma.github.io">FHC</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://furinahatecomma.github.io/2026/07/25/%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%9B%86%E5%90%88/">https://furinahatecomma.github.io/2026/07/25/%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%9B%86%E5%90%88/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://furinahatecomma.github.io" target="_blank">FHC 's Blog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/mizuki.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/07/25/%E6%9A%91%E6%9C%9F%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/" title="暑期集训总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">暑期集训总结</div></div><div class="info-2"><div class="info-item-1"> 六中部分  DAY 1 上午  CF280D k-Maximum Subsequence Sum 点修，查询区间 kkk 子段和。 查出来一个子段之后接下来我们可以对这个子段取反，相当于一个反悔贪心让我们可以生成所有的 k 子段和。 然后这个东西似乎为数不多的性质是这个东西是凸的，进而有两种做法：   对于每一个线段树节点维护一个大小为 kkk 的凸包，然后合并是 min⁡+\min +min+ 卷积，可以闵可夫斯基和合并（归并差分数组。   先 wqs 二分然后在区间里面？    P7560 [JOISC 2021] フードコート (Day1) 有 nnn 个队列，然后每次操作是对于区间的每一个队列 pb KKK 个 CCC 或者对于区间的每一个队列 pop KKK 个元素或至空。 查询是查询某一刻某队列第 BBB 个人的颜色。 操作分治，对时间轴建立线段树并且对序列扫描线。 那么就是在时间上挂载了加入和删除操作，然后查询类似一个线段树二分两次，第一次找到最前面的一次腾空队列，第二次找到第 BBB 个。 启发我们在遇到不好直接处理的操作大胆换维扫描线  CF1340F Nas...</div></div></div></a><a class="pagination-related" href="/2026/06/21/1d1d%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%86%B3%E7%AD%96%E5%8D%95%E8%B0%83%E6%80%A7/" title="1d1d动态规划决策单调性"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">1d1d动态规划决策单调性</div></div><div class="info-2"><div class="info-item-1">fi=max⁡fj+w(i,j)f_i = \max f_j + w(i, j) fi​=maxfj​+w(i,j) 如果在 iii 增大时取到 fif_ifi​ 的最大值取值点 jjj 不降，我们称这个为具备决策单调性。 对于 w(i,j)w(i,j)w(i,j) 是否可以简单计算，我们对于这个问题存在若干种做法。  1 w(i,j)w(i, j)w(i,j) 可以简单计算： 我们可以直接单调栈维护可能的决策点，在压入时我们可以二分两者的管辖区间。 这样我们就有一个 1log 的简单做法。  2 w(i,j)w(i, j)w(i,j) 无法简单计算，但是可以简单维护加入删除： 2.1 dp 的转移不依赖前面的转移（离线） 我们可以做如下分治： s(l,r,ol,or)s(l, r, ol, or)s(l,r,ol,or) 表示计算 [l,r][l, r][l,r] 值，决策点在 [ol,or][ol,or][ol,or] 的情况。 我们计算出 l,rl, rl,r 中点 midmidmid 的值与决策点，然后递归两侧即可。 时间复杂度是 1log 的，但是要乘上维护复杂度。 2...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/mizuki.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">FHC</div><div class="author-info-description">譲れないアイデンティティ</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/FurinaHateComma"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/25/%E6%9A%91%E6%9C%9F%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/" title="暑期集训总结">暑期集训总结</a><time datetime="2026-07-25T07:45:23.000Z" title="发表于 2026-07-25 15:45:23">2026-07-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/25/%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%9B%86%E5%90%88/" title="字符串集合">字符串集合</a><time datetime="2026-07-25T07:44:58.000Z" title="发表于 2026-07-25 15:44:58">2026-07-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/21/1d1d%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%86%B3%E7%AD%96%E5%8D%95%E8%B0%83%E6%80%A7/" title="1d1d动态规划决策单调性">1d1d动态规划决策单调性</a><time datetime="2026-06-21T04:06:42.000Z" title="发表于 2026-06-21 12:06:42">2026-06-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/11/%E4%BA%8C%E4%B8%AD%E9%9B%86%E8%AE%AD%E8%A1%A5%E9%A2%98%E5%90%88%E9%9B%86/" title="二中集训补题合集">二中集训补题合集</a><time datetime="2026-06-11T13:02:04.000Z" title="发表于 2026-06-11 21:02:04">2026-06-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/09/%E6%A8%A1%E6%8B%9F%E8%B4%B9%E7%94%A8%E6%B5%81/" title="模拟费用流">模拟费用流</a><time datetime="2026-06-09T05:26:42.000Z" title="发表于 2026-06-09 13:26:42">2026-06-09</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By FHC</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
