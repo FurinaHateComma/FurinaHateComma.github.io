@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>树上范围查询梦到哪句说那句 | FHC 's Blog</title><meta name="author" content="FHC"><meta name="copyright" content="FHC"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="树上最经典的范围无非是链信息查询，我们有一个经典的结构是树链剖分，它的复杂度是 log⁡2n\log^2 nlog2n 的。 树其实是一种线性结构，按理来说我们可以有分治做到 log⁡\loglog 的办法，但是树剖为什么是 log⁡2n\log^2 nlog2n 呢。 我们仔细看看，我们先对一个线性的树结构转换成了线性的区间结构并叠加了一个 log⁡\loglog，然后用常规的线性结构 log⁡">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树上范围查询梦到哪句说那句">
+<meta property="og:url" content="https://furinahatecomma.github.io/2026/08/03/%E6%A0%91%E4%B8%8A%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%E6%A2%A6%E5%88%B0%E5%93%AA%E5%8F%A5%E8%AF%B4%E9%82%A3%E5%8F%A5/index.html">
+<meta property="og:site_name" content="FHC &#39;s Blog">
+<meta property="og:description" content="树上最经典的范围无非是链信息查询，我们有一个经典的结构是树链剖分，它的复杂度是 log⁡2n\log^2 nlog2n 的。 树其实是一种线性结构，按理来说我们可以有分治做到 log⁡\loglog 的办法，但是树剖为什么是 log⁡2n\log^2 nlog2n 呢。 我们仔细看看，我们先对一个线性的树结构转换成了线性的区间结构并叠加了一个 log⁡\loglog，然后用常规的线性结构 log⁡">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://furinahatecomma.github.io/img/mizuki.jpg">
+<meta property="article:published_time" content="2026-08-03T12:35:21.000Z">
+<meta property="article:modified_time" content="2026-08-04T12:09:46.354Z">
+<meta property="article:author" content="FHC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://furinahatecomma.github.io/img/mizuki.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "树上范围查询梦到哪句说那句",
+  "url": "https://furinahatecomma.github.io/2026/08/03/%E6%A0%91%E4%B8%8A%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%E6%A2%A6%E5%88%B0%E5%93%AA%E5%8F%A5%E8%AF%B4%E9%82%A3%E5%8F%A5/",
+  "image": "https://furinahatecomma.github.io/img/mizuki.jpg",
+  "datePublished": "2026-08-03T12:35:21.000Z",
+  "dateModified": "2026-08-04T12:09:46.354Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "FHC",
+      "url": "https://furinahatecomma.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://furinahatecomma.github.io/2026/08/03/%E6%A0%91%E4%B8%8A%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%E6%A2%A6%E5%88%B0%E5%93%AA%E5%8F%A5%E8%AF%B4%E9%82%A3%E5%8F%A5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.5"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '树上范围查询梦到哪句说那句',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><script>document.documentElement.style.setProperty('--diy-bg', 'url(/img/bg/' + (Math.floor(Math.random()*10)+1) + '.webp)');</script><style>#page-header,#page-header.post-bg{transform:none!important;animation:none!important}#web_bg,#page-header,#page-header.post-bg{background-image:var(--diy-bg)!important;background-attachment:fixed!important;background-position:center!important;background-size:cover!important;background-repeat:no-repeat!important}#web_bg{opacity:0.85!important}#page-header:before,#page-header.post-bg:before{background:rgba(0,0,0,0.4)!important}</style><meta name="generator" content="Hexo 8.1.2"></head><body><div class="bg-animation" id="web_bg" style="background: none;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/mizuki.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">FHC 's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">树上范围查询梦到哪句说那句</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">树上范围查询梦到哪句说那句</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-08-03T12:35:21.000Z" title="发表于 2026-08-03 20:35:21">2026-08-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-08-04T12:09:46.354Z" title="更新于 2026-08-04 20:09:46">2026-08-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>树上最经典的范围无非是链信息查询，我们有一个经典的结构是树链剖分，它的复杂度是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mo><mi>log</mi><mo>⁡</mo></mo><mn>2</mn></msup><mi>n</mi></mrow><annotation encoding="application/x-tex">\log^2 n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0928879999999999em;vertical-align:-0.19444em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8984479999999999em;"><span style="top:-3.1473400000000002em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span></span></span></span> 的。</p>
+<p>树其实是一种线性结构，按理来说我们可以有分治做到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span> 的办法，但是树剖为什么是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mo><mi>log</mi><mo>⁡</mo></mo><mn>2</mn></msup><mi>n</mi></mrow><annotation encoding="application/x-tex">\log^2 n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0928879999999999em;vertical-align:-0.19444em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8984479999999999em;"><span style="top:-3.1473400000000002em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">n</span></span></span></span> 呢。</p>
+<p>我们仔细看看，我们先对一个线性的树结构转换成了线性的区间结构并叠加了一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span>，然后用常规的线性结构 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span> 分治，这也太不优美了。</p>
+<p>后者的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span> 显然没有什么办法进一步优化，前者的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span> 却值得思考，我们为什么要用一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span> 把一个我们不擅长的线性结构为了方便就直接叠加一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span> 呢？</p>
+<p>在这类分治中，我们很有可能在前几步进入一个很小的轻子树，然后就没了，也有可能走满 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span> 条重链卡满 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mo><mi>log</mi><mo>⁡</mo></mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\log^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0928879999999999em;vertical-align:-0.19444em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8984479999999999em;"><span style="top:-3.1473400000000002em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span>，不平均导致了冗余的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span>。</p>
+<p>考虑一个真正平均的分治吧，为了方便，我们任然按照重链的形式考虑：</p>
+<p>对于一条重链上我们为了做到真正的平均就要均等划分前两种情况，考虑我们处理一个轻子树 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span></span></span></span> 的复杂度为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r(p)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mclose">)</span></span></span></span>，我们应该按照 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>r</mi><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">r(p)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mclose">)</span></span></span></span> 分治划分两侧范围，而不是按照区间大小。</p>
+<p>先假设这个可以做到比较平均，那么我们此时就可以做到 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span> 的复杂度。</p>
+<p>考虑大块卡飞，但是其实做不到，我们这样把中点拎出来单独处理，两侧都小于一半了，现在唯一的问题是中点秩大小、</p>
+<p>一个梦话是：子树的秩小于子树的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo><mi>s</mi><mi>i</mi><mi>z</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">\log size</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord mathdefault">e</span></span></span></span>，我们注意到如果我们走一条轻边，重量减半，此时秩的上界也减半，所以是对的。</p>
+<p>注意到，秩的一种表达可以直接认为是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo><mi>s</mi><mi>i</mi><mi>z</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">\log size</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mord mathdefault">e</span></span></span></span>，那么这就是一个常规的全局平衡二叉树。</p>
+<p>我们从一个全新的角度来看，在 TopTree 中我们通过 Rake 和 Compress 来构建树上结构。</p>
+<p>全局平衡二叉树其实本质上是一个只保留了 Compress 构建的一颗 TopTree，简化结构必然带来的是复杂度的劣化或者功能性。</p>
+<p>确实，由于我们没有对于 Rake 建立平衡结构，导致我们的全局平衡二叉树可能存在若干个儿子，这导致了全局平衡二叉树不善于维护邻域系列信息。</p>
+<p>类似的，我们对 Rake 建立平衡结构之后，我们就得到了一颗静态 TopTree。</p>
+<p>观察结构：我们的每一个点表示的其实是一个联通块，对于 Rake 操作代表的点，我们可以类似为一颗子树，对于 Compress 代表的边，其有可能是链上的一段区间外加挂上的轻子树。</p>
+<p>WBTT 的深度是固定在 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>log</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">\log</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span></span></span></span> 级别的，这保证了 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mi>p</mi><mo separator="true">,</mo><mi>f</mi><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(p, fa)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">a</span><span class="mclose">)</span></span></span></span> 的边被包含的次数同级别，注意此时不然 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span></span></span></span> 的出现次数。</p>
+<p>睡着了，梦到了 WBTT。。。。</p>
+<p>树上 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 邻域以及一系列带限制的邻域双半群查询是 WBTT 的拿手好戏。</p>
+<p>我们由于簇的优秀性质，每一次合并带来的讨论边是 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span> 的，在两侧簇内分别 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>s</mi><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(sz)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span> 维护到当前点的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span></span></span></span> 邻域信息即可，由于树高极低，我们可以简单维护。</p>
+<p>TopCluser 美味，本质是边分块，存在一种简单的 dfs 写法。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://furinahatecomma.github.io">FHC</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://furinahatecomma.github.io/2026/08/03/%E6%A0%91%E4%B8%8A%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%E6%A2%A6%E5%88%B0%E5%93%AA%E5%8F%A5%E8%AF%B4%E9%82%A3%E5%8F%A5/">https://furinahatecomma.github.io/2026/08/03/%E6%A0%91%E4%B8%8A%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%E6%A2%A6%E5%88%B0%E5%93%AA%E5%8F%A5%E8%AF%B4%E9%82%A3%E5%8F%A5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://furinahatecomma.github.io" target="_blank">FHC 's Blog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/mizuki.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/07/25/%E6%9A%91%E6%9C%9F%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/" title="暑期集训总结"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">暑期集训总结</div></div><div class="info-2"><div class="info-item-1"> 六中部分  DAY 1 上午  CF280D k-Maximum Subsequence Sum 点修，查询区间 kkk 子段和。 查出来一个子段之后接下来我们可以对这个子段取反，相当于一个反悔贪心让我们可以生成所有的 k 子段和。 然后这个东西似乎为数不多的性质是这个东西是凸的，进而有两种做法：   对于每一个线段树节点维护一个大小为 kkk 的凸包，然后合并是 min⁡+\min +min+ 卷积，可以闵可夫斯基和合并（归并差分数组。   先 wqs 二分然后在区间里面？    P7560 [JOISC 2021] フードコート (Day1) 有 nnn 个队列，然后每次操作是对于区间的每一个队列 pb KKK 个 CCC 或者对于区间的每一个队列 pop KKK 个元素或至空。 查询是查询某一刻某队列第 BBB 个人的颜色。 操作分治，对时间轴建立线段树并且对序列扫描线。 那么就是在时间上挂载了加入和删除操作，然后查询类似一个线段树二分两次，第一次找到最前面的一次腾空队列，第二次找到第 BBB 个。 启发我们在遇到不好直接处理的操作大胆换维扫描线  CF1340F Nas...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/mizuki.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">FHC</div><div class="author-info-description">譲れないアイデンティティ</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">36</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">32</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/FurinaHateComma"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/08/03/%E6%A0%91%E4%B8%8A%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%E6%A2%A6%E5%88%B0%E5%93%AA%E5%8F%A5%E8%AF%B4%E9%82%A3%E5%8F%A5/" title="树上范围查询梦到哪句说那句">树上范围查询梦到哪句说那句</a><time datetime="2026-08-03T12:35:21.000Z" title="发表于 2026-08-03 20:35:21">2026-08-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/25/%E6%9A%91%E6%9C%9F%E9%9B%86%E8%AE%AD%E6%80%BB%E7%BB%93/" title="暑期集训总结">暑期集训总结</a><time datetime="2026-07-25T07:45:23.000Z" title="发表于 2026-07-25 15:45:23">2026-07-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/07/25/%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%9B%86%E5%90%88/" title="字符串集合">字符串集合</a><time datetime="2026-07-25T07:44:58.000Z" title="发表于 2026-07-25 15:44:58">2026-07-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/21/1d1d%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%86%B3%E7%AD%96%E5%8D%95%E8%B0%83%E6%80%A7/" title="1d1d动态规划决策单调性">1d1d动态规划决策单调性</a><time datetime="2026-06-21T04:06:42.000Z" title="发表于 2026-06-21 12:06:42">2026-06-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/06/11/%E4%BA%8C%E4%B8%AD%E9%9B%86%E8%AE%AD%E8%A1%A5%E9%A2%98%E5%90%88%E9%9B%86/" title="二中集训补题合集">二中集训补题合集</a><time datetime="2026-06-11T13:02:04.000Z" title="发表于 2026-06-11 21:02:04">2026-06-11</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By FHC</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.2</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.5"></script><script src="/js/main.js?v=5.5.5"></script><div class="js-pjax"><script>(async () => {
+  const showKatex = () => {
+    document.querySelectorAll('#article-container .katex').forEach(el => el.classList.add('katex-show'))
+  }
+
+  if (!window.katex_js_css) {
+    window.katex_js_css = true
+    await btf.getCSS('https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css')
+    if (false) {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/contrib/copy-tex.min.js')
+    }
+  }
+
+  showKatex()
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
